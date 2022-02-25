@@ -1,0 +1,122 @@
+#   __  __      _ _               ______ _
+#  |  \/  |    | | |             |  ____(_)
+#  | \  / | ___| | | _____      _| |__   _ _ __ ___
+#  | |\/| |/ _ \ | |/ _ \ \ /\ / /  __| | | '__/ _ \
+#  | |  | |  __/ | | (_) \ V  V /| |    | | | |  __/
+#  |_|  |_|\___|_|_|\___/ \_/\_/ |_|    |_|_|  \___|
+#  https://www.mellowfire.com/
+
+switch:
+##0
+  - platform: gpio
+    pin: #change PIN
+    id: up_pin_0
+    interlock: &interlock_group_0 [up_pin_0, down_pin_0]
+    restore_mode: always off
+  - platform: gpio
+    pin: #change PIN
+    id: down_pin_0
+    interlock: *interlock_group_0
+    restore_mode: always off
+
+##1
+  - platform: gpio
+    pin: #change PIN
+    id: up_pin_1
+    interlock: &interlock_group_1 [up_pin_1, down_pin_1]
+    restore_mode: always off
+  - platform: gpio
+    pin: #change PIN
+    id: down_pin_1
+    interlock: *interlock_group_1
+    restore_mode: always off
+
+##2
+  - platform: gpio
+    pin: #change PIN
+    id: up_pin_2
+    interlock: &interlock_group_2 [up_pin_2, down_pin_2]
+    restore_mode: always off
+  - platform: gpio
+    pin: #change PIN
+    id: down_pin_2
+    interlock: *interlock_group_2
+    restore_mode: always off
+
+binary_sensor:
+#0
+  - platform: gpio
+    pin: #change PIN
+    id: top_endstop_0
+  - platform: gpio
+    pin: #change PIN
+    id: bottom_endstop_0
+
+#1
+  - platform: gpio
+    pin: #change PIN
+    id: top_endstop_1
+  - platform: gpio
+    pin: #change PIN
+    id: bottom_endstop_1
+
+#2
+  - platform: gpio
+    pin: #change PIN
+    id: top_endstop_2
+  - platform: gpio
+    pin: #change PIN
+    id: bottom_endstop_2
+
+cover:
+#0
+  - platform: endstop
+    name: "My Endstop Cover 0"
+    id: my_cover_0
+    open_action:
+      - switch.turn_on: up_pin_0
+    open_duration: #change time
+    open_endstop: top_endstop_0
+
+    close_action:
+      - switch.turn_on: down_pin_0
+    close_duration: #change time
+    close_endstop: bottom_endstop_0
+    stop_action:
+      - switch.turn_off: up_pin_0
+      - switch.turn_off: down_pin_0
+    max_duration: #change time
+#1
+  - platform: endstop
+    name: "My Endstop Cover 1"
+    id: my_cover_1
+    open_action:
+      - switch.turn_on: up_pin_1
+    open_duration: #change time
+    open_endstop: top_endstop_1
+
+    close_action:
+      - switch.turn_on: down_pin_1
+    close_duration: #change time
+    close_endstop: bottom_endstop_1
+    stop_action:
+      - switch.turn_off: up_pin_1
+      - switch.turn_off: down_pin_1
+    max_duration: #change time
+#2  
+  - platform: endstop
+    name: "My Endstop Cover 2"
+    id: my_cover_2
+    open_action:
+      - switch.turn_on: up_pin_2
+    open_duration: #change time
+    open_endstop: top_endstop_2
+
+    close_action:
+      - switch.turn_on: down_pin_2
+    close_duration: #change time
+    close_endstop: bottom_endstop_2
+    stop_action:
+      - switch.turn_off: up_pin_2
+      - switch.turn_off: down_pin_2
+    max_duration: #change time
